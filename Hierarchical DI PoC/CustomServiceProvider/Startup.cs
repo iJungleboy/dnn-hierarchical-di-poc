@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ToSic.HierarchicalDI.TestObjects;
+using ToSic.HierarchicalDI.Page;
 
 namespace ToSic.HierarchicalDI.CustomServiceProvider;
 public class Startup

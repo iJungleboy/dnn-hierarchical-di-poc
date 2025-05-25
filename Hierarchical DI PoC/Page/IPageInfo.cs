@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.TestObjects;
+﻿namespace ToSic.HierarchicalDI.Page;
 
 public interface IPageInfo
 {

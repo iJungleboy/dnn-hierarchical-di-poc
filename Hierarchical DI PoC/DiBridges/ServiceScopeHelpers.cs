@@ -1,8 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace ToSic.HierarchicalDI.DiBridges;
-internal class ServiceScopeHelpers
+internal static class ServiceScopeHelpers
 {
+    public static IServiceProvider CreatePagesScopedServiceProvider(this IServiceProvider globalServiceProvider)
+    {
+        var pageScope = globalServiceProvider.CreateScope();
+        var pageSp = pageScope.ServiceProvider;
+        return pageSp;
+    }
+
     public static IServiceProvider CreateModuleScopedServiceProvider(IServiceProvider pageSp)
     {
         var moduleSp = pageSp.CreateScope().ServiceProvider;

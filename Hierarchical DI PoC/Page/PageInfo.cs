@@ -1,7 +1,7 @@
-﻿using ToSic.Sxc.Internal.Plumbing;
+﻿using ToSic.HierarchicalDI.DiBridges;
 
-namespace ToSic.HierarchicalDI.TestObjects;
-internal class PageInfo(PageScopedService<PageInfoReal> realPageInfo): IPageInfo
+namespace ToSic.HierarchicalDI.Page;
+internal class PageInfo(IPageScopedService<PageInfoReal> realPageInfo): IPageInfo
 {
     public int PageId => realPageInfo.Value.PageId; // Use the real PageInfo to get the PageId
 }

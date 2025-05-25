@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ToSic.HierarchicalDI.DiBridges;
 using ToSic.HierarchicalDI.Module;
-using ToSic.HierarchicalDI.TestObjects;
-using ToSic.Sxc.Internal.Plumbing;
+using ToSic.HierarchicalDI.Page;
 
 namespace ToSic.HierarchicalDI.CustomServiceProvider;
 public class TestHierarchicalDi
@@ -12,16 +11,12 @@ public class TestHierarchicalDi
     {
         // Arrange
         var serviceProvider = new ServiceCollection()
-            .AddScoped<PageScopeAccessor>()
-            .AddTransient(typeof(PageScopedService<>))
-            .AddScoped<PageInfoReal>()
-            .AddTransient<IPageInfo, PageInfo>()
-            .AddScoped<IModuleInfo, ModuleInfo>()
+            .SetupPageAndModuleScopes()
             .BuildServiceProvider();
 
         // Create a page scope and prepare shared page context
-        var pageScope = serviceProvider.CreateScope();
-        var pageSp = pageScope.ServiceProvider;
+        var pageSp = serviceProvider.CreatePagesScopedServiceProvider();//.CreateScope();
+        //var pageSp = pageScope.ServiceProvider;
         var pageOfPageScope = pageSp.GetRequiredService<PageInfoReal>();
         // Initialize the page info...
         pageOfPageScope.PageId = 88;
