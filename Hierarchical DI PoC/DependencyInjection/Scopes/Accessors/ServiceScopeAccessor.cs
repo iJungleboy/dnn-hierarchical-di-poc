@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using DotNetNuke.DependencyInjection.Scopes.Accessors;
 
-namespace DotNetNuke.DependencyInjection.Scopes;
+namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
 /// Special helper to get a ServiceProvider of a specified scope, in scenarios where child scopes need to access the parents scope's services, like for each module or content block.
 /// </summary>
-internal class ServiceScopeAccessor<TScopeDefinition>(/*string accessedScopeName*/)
-    : IServiceScopeAccessor,
-        IServiceScopeAccessor<TScopeDefinition>
+internal class ServiceScopeAccessor<TScopeDefinition>
+    : IServiceScopeAccessor<TScopeDefinition>
     where TScopeDefinition : ScopeDefinition, new()
 {
     private readonly TScopeDefinition _scopeDefinition = new();
