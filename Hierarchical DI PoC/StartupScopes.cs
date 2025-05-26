@@ -1,4 +1,5 @@
-﻿using DotNetNuke.DependencyInjection.Scopes.Initializer;
+﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
+using DotNetNuke.DependencyInjection.Scopes.Initializer;
 using DotNetNuke.Module;
 using DotNetNuke.Page;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -14,6 +15,8 @@ internal static class StartupScopes
 
         // Page Scopes
         services.TryAddScoped<IPageScopeAccessor, PageScopeAccessor>();
+        //services.TryAddScoped<IPageScopeAccessor, ServiceScopeAccessor<ScopePage>>();
+        services.TryAddScoped(typeof(IServiceScopeAccessor<>), typeof(ServiceScopeAccessor<>));
         services.AddTransient(typeof(IPageScopedService<>), typeof(PageScopedService<>));
         
         // Page Info

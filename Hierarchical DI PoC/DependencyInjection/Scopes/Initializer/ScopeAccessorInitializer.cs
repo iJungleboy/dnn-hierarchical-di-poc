@@ -1,4 +1,6 @@
-﻿namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
+﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
+
+namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
 internal class ScopeAccessorInitializer<TScopeAccessor>
     : IScopeAccessorInitializer<TScopeAccessor>
     where TScopeAccessor : IServiceScopeAccessor

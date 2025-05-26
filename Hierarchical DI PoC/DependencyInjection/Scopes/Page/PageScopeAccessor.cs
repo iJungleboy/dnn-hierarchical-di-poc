@@ -7,5 +7,5 @@
 /// Default constructor will always work, and use the current service provider as the source
 /// </remarks>
 internal class PageScopeAccessor()
-    : ServiceScopeAccessor(ServiceScopeConstants.ScopePage),
+    : ServiceScopeAccessor<ScopePage>(/*ServiceScopeConstants.ScopePage*/),
         IPageScopeAccessor;

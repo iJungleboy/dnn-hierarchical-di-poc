@@ -1,4 +1,5 @@
-﻿using DotNetNuke.DependencyInjection.Scopes.Initializer;
+﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
+using DotNetNuke.DependencyInjection.Scopes.Initializer;
 
 namespace DotNetNuke.DependencyInjection;
 internal static class ServiceScopeHelpers
