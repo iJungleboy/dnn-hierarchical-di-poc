@@ -1,13 +1,11 @@
-﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
-
-namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
+﻿namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
 internal class CurrentScopeInitializer(IServiceProvider currentServiceProvider)
 {
     public List<IScopeAccessorInitializer> Initializers { get; private set; } = [];
 
-    public void AddInitializer<TInitializer>() where TInitializer : IServiceScopeAccessor
+    public void AddInitializer<TScopeDefinition>() where TScopeDefinition : ScopeDefinition, new()
     {
-        var initializer = currentServiceProvider.GetRequiredService<IScopeAccessorInitializer<TInitializer>>();
+        var initializer = currentServiceProvider.GetRequiredService<IScopeAccessorInitializer<TScopeDefinition>>();
         Initializers.Add(initializer);
     }
 

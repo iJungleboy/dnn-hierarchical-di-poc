@@ -13,7 +13,7 @@ internal interface IScopeAccessorInitializer
 /// <summary>
 /// Typed initializer, specific to a specific scope accessor type.
 /// </summary>
-/// <typeparam name="TScopeAccessor"></typeparam>
-internal interface IScopeAccessorInitializer<TScopeAccessor>
+/// <typeparam name="TScopeDefinition"></typeparam>
+internal interface IScopeAccessorInitializer<TScopeDefinition>
     : IScopeAccessorInitializer
-    where TScopeAccessor : IServiceScopeAccessor;
+    where TScopeDefinition : ScopeDefinition, new();

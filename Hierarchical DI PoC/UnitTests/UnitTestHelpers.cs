@@ -1,5 +1,4 @@
 ﻿using DotNetNuke.DependencyInjection;
-using DotNetNuke.DependencyInjection.Scopes.Accessors;
 using DotNetNuke.Module;
 using DotNetNuke.Page;
 
@@ -15,11 +14,8 @@ internal static class UnitTestHelpers
     internal static IServiceProvider SetupPage(this IServiceProvider globalServiceProvider, int pageId)
     {
         // Create the scope and directly the service provider for the page scope
-        //var pageSp = globalServiceProvider
-        //    .CreateSubScope<IPageScopeAccessor>(ServiceScopeConstants.ScopePage);
-
         var pageSp = globalServiceProvider
-            .CreateSubScope<IServiceScopeAccessor<ScopePage>>(ServiceScopeConstants.ScopePage);
+            .CreateSubScope<ScopePage>(ServiceScopeConstants.ScopePage);
 
 
         pageSp.GetRequiredService<PageInfoInitializerService>()
@@ -36,10 +32,8 @@ internal static class UnitTestHelpers
     internal static IServiceProvider SetupModule(this IServiceProvider pageServiceProvider, int moduleId)
     {
         // Create the scope and directly the service provider for the page scope
-        //var moduleSp = pageServiceProvider
-        //    .CreateSubScope<IModuleScopeAccessor>(ServiceScopeConstants.ScopeModule);
         var moduleSp = pageServiceProvider
-            .CreateSubScope<IServiceScopeAccessor<ScopeModule>>(ServiceScopeConstants.ScopeModule);
+            .CreateSubScope<ScopeModule>(ServiceScopeConstants.ScopeModule);
 
         var moduleOfModuleScope1 = moduleSp.GetRequiredService<ModuleInfoReal>();
         moduleOfModuleScope1.ModuleId = moduleId;
