@@ -11,8 +11,11 @@
 
   <ItemGroup>
     <Compile Remove="DependencyInjection\NewFolder\**" />
+    <Compile Remove="DependencyInjection\Scopes\NewFolder\**" />
     <EmbeddedResource Remove="DependencyInjection\NewFolder\**" />
+    <EmbeddedResource Remove="DependencyInjection\Scopes\NewFolder\**" />
     <None Remove="DependencyInjection\NewFolder\**" />
+    <None Remove="DependencyInjection\Scopes\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>

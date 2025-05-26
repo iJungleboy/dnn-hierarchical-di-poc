@@ -2,5 +2,5 @@
 
 internal class PageInfoReal : IPageInfo
 {
-    public int PageId { get; set; } = new Random().Next();
+    public int PageId { get; set; } = -1;
 }

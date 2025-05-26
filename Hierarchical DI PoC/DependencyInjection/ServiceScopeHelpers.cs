@@ -24,6 +24,9 @@ internal static class ServiceScopeHelpers
         moduleSp.GetRequiredService<IPageScopeAccessor>()
             .SetupServiceProvider(pageSp, "module");
 
+        moduleSp.GetRequiredService<IModuleScopeAccessor>()
+            .SetupServiceProvider(moduleSp, "module");
+
         return moduleSp;
     }
 }
