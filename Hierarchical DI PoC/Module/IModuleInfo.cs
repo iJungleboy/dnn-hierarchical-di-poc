@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.Module;
+﻿namespace DotNetNuke.Module;
 
 internal interface IModuleInfo
 {

@@ -1,34 +1,46 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ToSic.HierarchicalDI.DependencyInjection;
-using ToSic.HierarchicalDI.Module;
-using ToSic.HierarchicalDI.Page;
+﻿using DotNetNuke.DependencyInjection;
+using DotNetNuke.Module;
+using DotNetNuke.Page;
+using Microsoft.Extensions.DependencyInjection;
 using static Xunit.Assert;
 
-namespace ToSic.HierarchicalDI.UnitTests;
+namespace DotNetNuke.UnitTests;
 public class TestHierarchicalDi(IServiceProvider globalServiceProvider)
 {
-    private const int MockPageId = 88;
+    public const int MockPageId = 88;
 
-    [Fact]
-    public void PageScopedPageInfoIsInitialized()
+    [Theory]
+    [InlineData(21)]
+    [InlineData(42)]
+    public void PageScopedPageInfoIsInitialized(int pageId)
     {
         // Arrange
         // Create a page scope and prepare shared page context
-        var pageSp = globalServiceProvider.SetupPage(MockPageId);
+        var pageSp = globalServiceProvider.SetupPage(pageId);
 
         var pageOfPageScope = pageSp.GetRequiredService<IPageInfo>();
-        Equal(MockPageId, pageOfPageScope.PageId);
+        Equal(pageId, pageOfPageScope.PageId);
+    }
+
+    [Theory]
+    [InlineData(21)]
+    [InlineData(42)]
+    public void PageScopedPageInfosAreInitializedButNotSame(int pageId)
+    {
+        var pageSp = globalServiceProvider.SetupPage(pageId);
+        var pageInfo1 = pageSp.GetRequiredService<IPageInfo>();
+        var pageInfo2 = pageSp.GetRequiredService<IPageInfo>();
+        Equal(pageId, pageInfo1.PageId);
+        Equal(pageId, pageInfo2.PageId);
+        NotSame(pageInfo1, pageInfo2);
     }
 
     [Fact]
-    public void PageScopedPageInfosAreInitializedButNotSame()
+    public void PageInfoInGlobalScopeNotAllowed()
     {
-        var pageSp = globalServiceProvider.SetupPage(MockPageId);
-        var pageInfo1 = pageSp.GetRequiredService<IPageInfo>();
-        var pageInfo2 = pageSp.GetRequiredService<IPageInfo>();
-        Equal(MockPageId, pageInfo1.PageId);
-        Equal(MockPageId, pageInfo2.PageId);
-        NotSame(pageInfo1, pageInfo2);
+        var globalPageInfo = globalServiceProvider.GetRequiredService<IPageInfo>();
+        // Assert that we cannot get a page info in the global scope
+        Throws<InvalidOperationException>(() => globalPageInfo.PageId);
     }
 
     [Fact]

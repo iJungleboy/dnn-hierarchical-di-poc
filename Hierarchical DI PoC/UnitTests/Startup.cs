@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ToSic.HierarchicalDI.DependencyInjection;
 
-namespace ToSic.HierarchicalDI.UnitTests;
+namespace DotNetNuke.UnitTests;
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

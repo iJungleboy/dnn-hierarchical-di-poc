@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.Module;
+﻿namespace DotNetNuke.Module;
 internal class ModuleInfo : IModuleInfo
 {
     public int ModuleId { get; set;  } = new Random().Next(); // Simulating a module ID, replace with actual logic if needed

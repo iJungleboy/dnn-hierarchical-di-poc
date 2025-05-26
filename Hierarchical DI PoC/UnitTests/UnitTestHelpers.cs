@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ToSic.HierarchicalDI.DependencyInjection;
-using ToSic.HierarchicalDI.Page;
+﻿using DotNetNuke.DependencyInjection;
+using DotNetNuke.Page;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace ToSic.HierarchicalDI.UnitTests;
+namespace DotNetNuke.UnitTests;
 internal static class UnitTestHelpers
 {
     /// <summary>
@@ -13,8 +13,10 @@ internal static class UnitTestHelpers
     /// <returns></returns>
     internal static IServiceProvider SetupPage(this IServiceProvider globalServiceProvider, int pageId)
     {
+        // Create the scope and directly the service provider for the page scope
         var pageSp = globalServiceProvider
             .CreatePagesScopedServiceProvider();
+
         pageSp.GetRequiredService<PageInfoInitializerService>()
             .SetupCurrentPage(pageId);
         return pageSp;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace ToSic.HierarchicalDI.DependencyInjection.PageScope;
+namespace DotNetNuke.DependencyInjection.PageScope;
 
 /// <summary>
 /// Provide service which was generated within the page scope.

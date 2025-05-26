@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.Page;
+﻿namespace DotNetNuke.Page;
 
 /// <summary>
 /// Simulate the setup of a page info

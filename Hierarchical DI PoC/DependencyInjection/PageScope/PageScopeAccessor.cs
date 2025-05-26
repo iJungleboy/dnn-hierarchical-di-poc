@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace ToSic.HierarchicalDI.DependencyInjection.PageScope;
+namespace DotNetNuke.DependencyInjection.PageScope;
 
 /// <summary>
 /// Special helper to get a ServiceProvider of the page scope, in scenarios where each module has an own scope. 
@@ -8,23 +8,24 @@ namespace ToSic.HierarchicalDI.DependencyInjection.PageScope;
 /// <remarks>
 /// Default constructor will always work, and use the current service provider as the source
 /// </remarks>
-internal class PageScopeAccessor(IServiceProvider currentServiceProvider) : IPageScopeAccessor
+internal class PageScopeAccessor : IPageScopeAccessor
 {
-    public void AttachPageServiceProvider(IServiceProvider pageServiceProvider)
+    public void AttachPageScopedServiceProvider(IServiceProvider pageServiceProvider, string scopeName)
     {
         ServiceProvider = pageServiceProvider;
-        ProvidedInModule = true;
+        CurrentScopeName = scopeName;
     }
 
     /// <inheritdoc />
     [field: AllowNull, MaybeNull]
     public IServiceProvider ServiceProvider
     {
-        get => field ?? currentServiceProvider;
+        get => field ?? throw new InvalidOperationException($"The {nameof(ServiceProvider)} was not initialized for the {nameof(IPageScopeAccessor)}");
         private set;
     }
 
-    /// <inheritdoc />
-    public bool ProvidedInModule { get; private set; }
+    public string AccessedScopeName => "page";
+
+    public string CurrentScopeName { get; private set; } = "unknown";
 
 }

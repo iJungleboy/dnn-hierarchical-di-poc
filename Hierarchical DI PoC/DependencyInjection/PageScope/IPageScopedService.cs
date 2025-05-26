@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.DependencyInjection.PageScope;
+﻿namespace DotNetNuke.DependencyInjection.PageScope;
 
 public interface IPageScopedService<out T> where T : class
 {

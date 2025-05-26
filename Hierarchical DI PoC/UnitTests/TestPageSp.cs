@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.UnitTests;
+﻿namespace DotNetNuke.UnitTests;
 public class TestPageSp(IServiceProvider serviceProvider)
 {
     //[Fact]

@@ -1,4 +1,4 @@
-﻿namespace ToSic.HierarchicalDI.Page;
+﻿namespace DotNetNuke.Page;
 
 public interface IPageInfo
 {
