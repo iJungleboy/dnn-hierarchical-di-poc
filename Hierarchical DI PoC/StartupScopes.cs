@@ -25,6 +25,7 @@ internal static class StartupScopes
         // Module Info
         services.TryAddScoped<ModuleInfoReal>();
         services.TryAddTransient<IModuleInfo, ModuleInfo>();
+        services.TryAddTransient<ModuleInfoInitializerService>();
 
         return services;
     }

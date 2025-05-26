@@ -35,8 +35,9 @@ internal static class UnitTestHelpers
         var moduleSp = pageServiceProvider
             .CreateSubScope<ScopeModule>(ServiceScopeConstants.ScopeModule);
 
-        var moduleOfModuleScope1 = moduleSp.GetRequiredService<ModuleInfoReal>();
-        moduleOfModuleScope1.ModuleId = moduleId;
+        moduleSp.GetRequiredService<ModuleInfoInitializerService>()
+            .SetupCurrentModule(moduleId);
+        //moduleOfModuleScope1.ModuleId = moduleId;
         return moduleSp;
     }
 

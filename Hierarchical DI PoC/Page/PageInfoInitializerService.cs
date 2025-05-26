@@ -5,7 +5,6 @@
 /// </summary>
 internal class PageInfoInitializerService(PageInfoReal pageInfo)
 {
-
     public void SetupCurrentPage(int pageId)
     {
         pageInfo.PageId = pageId;
