@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.DependencyInjection;
+using DotNetNuke.Module;
 using DotNetNuke.Page;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -20,6 +21,23 @@ internal static class UnitTestHelpers
         pageSp.GetRequiredService<PageInfoInitializerService>()
             .SetupCurrentPage(pageId);
         return pageSp;
+    }
+
+    /// <summary>
+    /// Create a page scope and prepare shared page context.
+    /// </summary>
+    /// <param name="pageServiceProvider"></param>
+    /// <param name="moduleId"></param>
+    /// <returns></returns>
+    internal static IServiceProvider SetupModule(this IServiceProvider pageServiceProvider, int moduleId)
+    {
+        // Create the scope and directly the service provider for the page scope
+        var moduleSp = pageServiceProvider
+            .CreateModuleScopedServiceProvider();
+
+        var moduleOfModuleScope1 = moduleSp.GetRequiredService<ModuleInfoReal>();
+        moduleOfModuleScope1.ModuleId = moduleId;
+        return moduleSp;
     }
 
 }

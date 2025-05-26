@@ -1,4 +1,4 @@
-﻿using DotNetNuke.DependencyInjection.PageScope;
+﻿using DotNetNuke.DependencyInjection.Scopes;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.DependencyInjection;
@@ -15,7 +15,7 @@ internal static class ServiceScopeHelpers
         return pageSp;
     }
 
-    public static IServiceProvider CreateModuleScopedServiceProvider(IServiceProvider pageSp)
+    public static IServiceProvider CreateModuleScopedServiceProvider(this IServiceProvider pageSp)
     {
         var moduleSp = pageSp.CreateScope().ServiceProvider;
 

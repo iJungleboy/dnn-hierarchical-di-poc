@@ -1,6 +1,4 @@
-﻿using DotNetNuke.DependencyInjection.Scopes;
-
-namespace DotNetNuke.DependencyInjection.PageScope;
+﻿namespace DotNetNuke.DependencyInjection.Scopes;
 
 /// <summary>
 /// Special helper to get a ServiceProvider of the page scope, in scenarios where each module has an own scope. 
@@ -8,8 +6,4 @@ namespace DotNetNuke.DependencyInjection.PageScope;
 /// <remarks>
 /// Default constructor will always work, and use the current service provider as the source
 /// </remarks>
-internal class PageScopeAccessor : ServiceScopeAccessor, IPageScopeAccessor
-{
-    public override string AccessedScopeName => "page";
-
-}
+internal class PageScopeAccessor() : ServiceScopeAccessor("page"), IPageScopeAccessor;

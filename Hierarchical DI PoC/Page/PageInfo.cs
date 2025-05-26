@@ -1,4 +1,4 @@
-﻿using DotNetNuke.DependencyInjection.PageScope;
+﻿using DotNetNuke.DependencyInjection.Scopes;
 
 namespace DotNetNuke.Page;
 internal class PageInfo(IPageScopedService<PageInfoReal> realPageInfo): IPageInfo

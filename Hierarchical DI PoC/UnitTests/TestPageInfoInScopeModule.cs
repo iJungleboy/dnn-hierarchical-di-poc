@@ -1,10 +1,9 @@
-﻿using DotNetNuke.Module;
-using DotNetNuke.Page;
+﻿using DotNetNuke.Page;
 using Microsoft.Extensions.DependencyInjection;
 using static Xunit.Assert;
 
 namespace DotNetNuke.UnitTests;
-public class TestHierarchicalDi(IServiceProvider globalServiceProvider)
+public class TestPageInfoInScopeModule(IServiceProvider globalServiceProvider)
 {
     public const int MockPageId = 88;
 
@@ -34,24 +33,5 @@ public class TestHierarchicalDi(IServiceProvider globalServiceProvider)
         NotSame(pageOfPageScope, pageOfModuleScope1);
         NotSame(pageOfPageScope, pageOfModuleScope2);
 
-        // Simulate retrieving the same module in the first scope
-        var moduleOfModScope1A = moduleSp1.GetRequiredService<IModuleInfo>();
-        var moduleOfModScope1B = moduleSp1.GetRequiredService<IModuleInfo>();
-
-        // Assert that the module is the same in the first scope
-        NotSame(moduleOfModScope1A, moduleOfModScope1B);
-        Equal(moduleOfModScope1A.ModuleId, moduleOfModScope1B.ModuleId);
-
-        // Simulate retrieving the same module in the second scope
-        var moduleOfModScope2A = moduleSp2.GetRequiredService<IModuleInfo>();
-        var moduleOfModScope2B = moduleSp2.GetRequiredService<IModuleInfo>();
-
-        // Assert that the module is the same in the second scope
-        NotSame(moduleOfModScope2A, moduleOfModScope2B);
-        Equal(moduleOfModScope2A.ModuleId, moduleOfModScope2B.ModuleId);
-
-        // Assert that the modules in different scopes are not the same
-        NotSame(moduleOfModScope1A, moduleOfModScope2A);
-        NotEqual(moduleOfModScope1A.ModuleId, moduleOfModScope2A.ModuleId);
     }
 }

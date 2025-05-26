@@ -11,11 +11,8 @@
 
   <ItemGroup>
     <Compile Remove="DependencyInjection\NewFolder\**" />
-    <Compile Remove="NewFolder\**" />
     <EmbeddedResource Remove="DependencyInjection\NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
     <None Remove="DependencyInjection\NewFolder\**" />
-    <None Remove="NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +28,10 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Docs\" />
   </ItemGroup>
 
 </Project>

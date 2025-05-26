@@ -1,4 +1,4 @@
-﻿namespace DotNetNuke.DependencyInjection.PageScope;
+﻿namespace DotNetNuke.DependencyInjection.Scopes;
 
 public interface IPageScopedService<out T> where T : class
 {

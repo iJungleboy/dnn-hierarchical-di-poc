@@ -5,7 +5,7 @@ namespace DotNetNuke.DependencyInjection.Scopes;
 /// <summary>
 /// Special helper to get a ServiceProvider of a specified scope, in scenarios where child scopes need to access the parents scope's services, like for each module or content block.
 /// </summary>
-internal abstract class ServiceScopeAccessor : IServiceScopeAccessor
+internal abstract class ServiceScopeAccessor(string accessedScopeName) : IServiceScopeAccessor
 {
     public void SetupServiceProvider(IServiceProvider serviceProvider, string currentScopeName)
     {
@@ -21,7 +21,7 @@ internal abstract class ServiceScopeAccessor : IServiceScopeAccessor
         private set;
     }
 
-    public virtual string AccessedScopeName => "unknown";
+    public virtual string AccessedScopeName => accessedScopeName;
 
     public string CurrentScopeName { get; private set; } = "unknown";
 

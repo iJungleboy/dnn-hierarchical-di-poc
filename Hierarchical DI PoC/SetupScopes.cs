@@ -1,4 +1,4 @@
-﻿using DotNetNuke.DependencyInjection.PageScope;
+﻿using DotNetNuke.DependencyInjection.Scopes;
 using DotNetNuke.Module;
 using DotNetNuke.Page;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +17,7 @@ internal static class SetupScopes
         services.TryAddTransient<PageInfoInitializerService>();
 
         services.TryAddScoped<ModuleInfoReal>();
-        services.TryAddScoped<IModuleInfo, ModuleInfo>();
+        services.TryAddTransient<IModuleInfo, ModuleInfo>();
 
         return services;
     }
