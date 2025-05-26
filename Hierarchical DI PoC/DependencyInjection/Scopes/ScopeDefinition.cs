@@ -1,12 +1,9 @@
 ﻿namespace DotNetNuke.DependencyInjection.Scopes;
-public abstract class ScopeDefinition(string scopeName)
-{
-    public string ScopeName => scopeName;
-}
+public abstract record ScopeDefinition(string ScopeName);
 
-public class ScopeRoot() : ScopeDefinition(ServiceScopeConstants.ScopeRoot);
+public record ScopeRoot() : ScopeDefinition(ServiceScopeConstants.ScopeRoot);
 
-public class ScopePage() : ScopeDefinition(ServiceScopeConstants.ScopePage);
+public record ScopePage() : ScopeDefinition(ServiceScopeConstants.ScopePage);
 
-public class ScopeModule() : ScopeDefinition(ServiceScopeConstants.ScopeModule);
+public record ScopeModule() : ScopeDefinition(ServiceScopeConstants.ScopeModule);
 

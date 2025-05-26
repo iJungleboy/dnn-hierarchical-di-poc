@@ -5,7 +5,7 @@ internal class ScopeAccessorInitializer<TScopeDefinition>
     : IScopeAccessorInitializer<TScopeDefinition>
     where TScopeDefinition : ScopeDefinition, new()
 {
-    public bool StartFreshScope { get; set; }
+    public bool ShouldNotInheritState { get; set; }
 
     public void Run(string currentName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider)
     {
@@ -17,7 +17,7 @@ internal class ScopeAccessorInitializer<TScopeDefinition>
 
         // If the parent is the root scope, then we need to use the current service provider
         // Otherwise we're already in a deeper scope, and we should use the one provided by the previous scope accessor
-        var pageScopeServiceProvider = parentScopeAccessor.IsValid && !StartFreshScope
+        var pageScopeServiceProvider = parentScopeAccessor.IsValid && !ShouldNotInheritState
             ? parentScopeAccessor.ServiceProvider
             : currentServiceProvider;
 
