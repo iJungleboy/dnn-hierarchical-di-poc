@@ -3,10 +3,10 @@
 namespace DotNetNuke.DependencyInjection.Scopes;
 
 /// <summary>
-/// Provide service which was generated within the page scope.
+/// Provide service from the current or some parent scope.
 /// </summary>
-/// <typeparam name="T"></typeparam>
-/// <typeparam name="TScopeDefinition"></typeparam>
+/// <typeparam name="T">The service type to retrieve, must be registered in DI.</typeparam>
+/// <typeparam name="TScopeDefinition">The definition class for this scope.</typeparam>
 internal class ScopedService<TScopeDefinition, T>(IServiceScopeAccessor<TScopeDefinition> moduleScopeAccessor)
     : IScopedService<TScopeDefinition, T> where T : class
     where TScopeDefinition : ScopeDefinition, new()
