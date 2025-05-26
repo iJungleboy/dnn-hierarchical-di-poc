@@ -9,7 +9,7 @@ internal static class StartupScopes
     public static IServiceCollection SetupPageAndModuleScopes(this IServiceCollection services)
     {
         // Scope Initializers
-        services.TryAddTransient(typeof(IScopeInitializer<>), typeof(ScopeAccessorInitializer<>));
+        services.TryAddTransient(typeof(IScopeAccessorInitializer<>), typeof(ScopeAccessorInitializer<>));
         services.TryAddScoped<CurrentScopeInitializer>();
 
         // Page Scopes

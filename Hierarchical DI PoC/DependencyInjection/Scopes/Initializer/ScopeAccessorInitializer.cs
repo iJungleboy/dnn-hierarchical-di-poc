@@ -1,6 +1,6 @@
 ﻿namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
 internal class ScopeAccessorInitializer<TScopeAccessor>
-    : IScopeInitializer<TScopeAccessor>
+    : IScopeAccessorInitializer<TScopeAccessor>
     where TScopeAccessor : IServiceScopeAccessor
 {
     public void Run(string currentName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider)

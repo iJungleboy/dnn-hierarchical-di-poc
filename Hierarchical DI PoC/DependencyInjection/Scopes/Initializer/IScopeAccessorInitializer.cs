@@ -3,7 +3,7 @@
 /// <summary>
 /// Untyped initializer, to store in lists of initializers, to be run when a new scope is created.
 /// </summary>
-internal interface IScopeInitializer
+internal interface IScopeAccessorInitializer
 {
     void Run(string currentName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider);
 }
@@ -12,6 +12,6 @@ internal interface IScopeInitializer
 /// Typed initializer, specific to a specific scope accessor type.
 /// </summary>
 /// <typeparam name="TScopeAccessor"></typeparam>
-internal interface IScopeInitializer<TScopeAccessor>
-    : IScopeInitializer
+internal interface IScopeAccessorInitializer<TScopeAccessor>
+    : IScopeAccessorInitializer
     where TScopeAccessor : IServiceScopeAccessor;
