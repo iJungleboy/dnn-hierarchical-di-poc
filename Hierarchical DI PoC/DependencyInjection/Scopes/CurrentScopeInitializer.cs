@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.DependencyInjection.Scopes;
-internal class CurrentScopeInitializer
+internal class CurrentScopeInitializer(IServiceProvider currentServiceProvider)
 {
     public List<IScopeInitializer> Initializers { get; private set; } = [];
 
@@ -12,7 +12,13 @@ internal class CurrentScopeInitializer
         Initializers.Add(initializer);
     }
 
-    public void Run(string scopeName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider)
+    public void Add<TInitializer>() where TInitializer : IServiceScopeAccessor
+    {
+        var initializer = currentServiceProvider.GetRequiredService<IScopeInitializer<TInitializer>>();
+        Add(initializer);
+    }
+
+    public void Run(string scopeName, IServiceProvider parentServiceProvider)
     {
         // Check if parent scope has a list of initializers, if so, get them and run them first
         var parentScopeInitializer = parentServiceProvider.GetRequiredService<CurrentScopeInitializer>();
