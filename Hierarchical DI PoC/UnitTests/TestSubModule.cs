@@ -4,19 +4,19 @@ using DotNetNuke.DependencyInjection;
 namespace DotNetNuke.UnitTests;
 public class TestSubModule(IServiceProvider globalServiceProvider)
 {
-    [Fact]
-    public void NormalModuleHasNoParent()
-    {
-        var first = ArrangeModuleServiceProvider(101).GetRequiredService<IModuleInfo>();
-        Null(first.ParentModule);
-    }
-
     private IServiceProvider ArrangeModuleServiceProvider(int moduleId)
     {
         var moduleSp = globalServiceProvider
             .SetupPage(999)
             .SetupModule(moduleId);
         return moduleSp;
+    }
+
+    [Fact]
+    public void NormalModuleHasNoParent()
+    {
+        var first = ArrangeModuleServiceProvider(101).GetRequiredService<IModuleInfo>();
+        Null(first.ParentModule);
     }
 
     private (IServiceProvider MainSp, IServiceProvider SubSp) ArrangeSubModuleServiceProviders(int moduleId, int subModuleId)
@@ -36,7 +36,7 @@ public class TestSubModule(IServiceProvider globalServiceProvider)
     [Theory]
     [InlineData(101, 10001)]
     public void SubModuleHasCorrectId(int moduleId, int subModuleId)
-        => Equal(10001, ArrangeSubModule(moduleId, subModuleId).ModuleId);
+        => Equal(subModuleId, ArrangeSubModule(moduleId, subModuleId).ModuleId);
 
     [Theory]
     [InlineData(101, 10001)]
@@ -45,8 +45,13 @@ public class TestSubModule(IServiceProvider globalServiceProvider)
 
     [Theory]
     [InlineData(101, 10001)]
+    public void SubModuleHasParentButNoGrandparent(int moduleId, int subModuleId)
+        => Null(ArrangeSubModule(moduleId, subModuleId).ParentModule!.ParentModule);
+
+    [Theory]
+    [InlineData(101, 10001)]
     public void SubModuleParentHasCorrectId(int moduleId, int subModuleId)
-        => Equal(101, ArrangeSubModule(moduleId, subModuleId).ParentModule!.ModuleId);
+        => Equal(moduleId, ArrangeSubModule(moduleId, subModuleId).ParentModule!.ModuleId);
 
     private IModuleInfo ArrangeModuleWithSubmodule(int moduleId, int subModuleId)
     {
@@ -63,4 +68,53 @@ public class TestSubModule(IServiceProvider globalServiceProvider)
     [InlineData(101, 10001)]
     public void ModuleWithSubModuleHasNoParent(int moduleId, int subModuleId)
         => Null(ArrangeModuleWithSubmodule(moduleId, subModuleId).ParentModule);
+
+    private (IServiceProvider MainSp, IServiceProvider SubSp, IServiceProvider SubSubSp)
+        ArrangeSubSubModuleServiceProviders(int moduleId, int subModuleId, int subSubModuleId)
+    {
+        var moduleSp = ArrangeModuleServiceProvider(moduleId);
+        var subModuleSp = moduleSp
+            .SetupModuleInModule(subModuleId);
+        var subSubModuleSp = subModuleSp
+            .SetupModuleInModule(subSubModuleId);
+        return (moduleSp, subModuleSp, subSubModuleSp);
+    }
+
+    private IModuleInfo ArrangeSubSubModule(int moduleId, int subModuleId, int subSubModuleId)
+    {
+        var submoduleServiceProvider = ArrangeSubSubModuleServiceProviders(moduleId, subModuleId, subSubModuleId).SubSubSp;
+        return submoduleServiceProvider.GetRequiredService<IModuleInfo>();
+    }
+
+
+    [Theory]
+    [InlineData(101, 10001, 20001)]
+    public void SubSubModuleHasCorrectId(int moduleId, int subModuleId, int subSubModuleId)
+        => Equal(subSubModuleId, ArrangeSubSubModule(moduleId, subModuleId, subSubModuleId).ModuleId);
+
+    [Theory]
+    [InlineData(101, 10001, 20001)]
+    public void SubSubModuleHasParent(int moduleId, int subModuleId, int subSubModuleId)
+        => NotNull(ArrangeSubSubModule(moduleId, subModuleId, subSubModuleId).ParentModule);
+
+    [Theory]
+    [InlineData(101, 10001, 20001)]
+    public void SubSubModuleHasParentParent(int moduleId, int subModuleId, int subSubModuleId)
+        => NotNull(ArrangeSubSubModule(moduleId, subModuleId, subSubModuleId).ParentModule!.ParentModule);
+
+    [Theory]
+    [InlineData(101, 10001, 20001)]
+    public void SubSubModuleHasParentParentButNoGrandparent(int moduleId, int subModuleId, int subSubModuleId)
+        => Null(ArrangeSubSubModule(moduleId, subModuleId, subSubModuleId).ParentModule!.ParentModule!.ParentModule);
+
+    [Theory]
+    [InlineData(101, 10001, 20001)]
+    public void SubSubModuleParentHasCorrectId(int moduleId, int subModuleId, int subSubModuleId)
+        => Equal(subModuleId, ArrangeSubSubModule(moduleId, subModuleId, subSubModuleId).ParentModule!.ModuleId);
+
+    [Theory]
+    [InlineData(101, 10001, 20001)]
+    public void SubSubModuleParentParentHasCorrectId(int moduleId, int subModuleId, int subSubModuleId)
+        => Equal(moduleId, ArrangeSubSubModule(moduleId, subModuleId, subSubModuleId).ParentModule!.ParentModule!.ModuleId);
+
 }
