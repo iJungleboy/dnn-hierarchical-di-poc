@@ -11,7 +11,7 @@ internal static class ServiceScopeHelpers
 
         // Make sure the page scope has the PageScopeAccessor initialized
         pageSp.GetRequiredService<IPageScopeAccessor>()
-            .AttachPageScopedServiceProvider(pageSp, "page");
+            .SetupServiceProvider(pageSp, "page");
         return pageSp;
     }
 
@@ -22,7 +22,7 @@ internal static class ServiceScopeHelpers
         // In the module scope, we initialize the scoped PageScope Accessor and give it the parent scope
         // This is necessary for it to be able to give page-scoped objects
         moduleSp.GetRequiredService<IPageScopeAccessor>()
-            .AttachPageScopedServiceProvider(pageSp, "module");
+            .SetupServiceProvider(pageSp, "module");
 
         return moduleSp;
     }

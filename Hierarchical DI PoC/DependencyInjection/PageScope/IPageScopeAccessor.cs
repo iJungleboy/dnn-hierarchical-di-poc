@@ -1,2 +1,4 @@
-﻿namespace DotNetNuke.DependencyInjection.PageScope;
+﻿using DotNetNuke.DependencyInjection.Scopes;
+
+namespace DotNetNuke.DependencyInjection.PageScope;
 public interface IPageScopeAccessor: IServiceScopeAccessor;

@@ -1,4 +1,4 @@
-﻿namespace DotNetNuke.DependencyInjection.PageScope;
+﻿namespace DotNetNuke.DependencyInjection.Scopes;
 
 /// <summary>
 /// Special helper to get a ServiceProvider of the page scope, in scenarios where inner scopes are used, like for each module.
@@ -8,9 +8,9 @@ public interface IServiceScopeAccessor
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="pageServiceProvider">Page scoped service provider.</param>
-    /// <param name="scopeName">Information about the scope this was created in, mainly for debugging issues.</param>
-    internal void AttachPageScopedServiceProvider(IServiceProvider pageServiceProvider, string scopeName);
+    /// <param name="serviceProvider">Page scoped service provider.</param>
+    /// <param name="currentScopeName">Information about the scope this was created in, mainly for debugging issues.</param>
+    internal void SetupServiceProvider(IServiceProvider serviceProvider, string currentScopeName);
 
     /// <summary>
     /// The ServiceProvider.

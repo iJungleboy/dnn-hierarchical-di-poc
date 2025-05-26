@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using DotNetNuke.DependencyInjection.Scopes;
 
 namespace DotNetNuke.DependencyInjection.PageScope;
 
@@ -8,24 +8,8 @@ namespace DotNetNuke.DependencyInjection.PageScope;
 /// <remarks>
 /// Default constructor will always work, and use the current service provider as the source
 /// </remarks>
-internal class PageScopeAccessor : IPageScopeAccessor
+internal class PageScopeAccessor : ServiceScopeAccessor, IPageScopeAccessor
 {
-    public void AttachPageScopedServiceProvider(IServiceProvider pageServiceProvider, string scopeName)
-    {
-        ServiceProvider = pageServiceProvider;
-        CurrentScopeName = scopeName;
-    }
-
-    /// <inheritdoc />
-    [field: AllowNull, MaybeNull]
-    public IServiceProvider ServiceProvider
-    {
-        get => field ?? throw new InvalidOperationException($"The {nameof(ServiceProvider)} was not initialized for the {nameof(IPageScopeAccessor)}");
-        private set;
-    }
-
-    public string AccessedScopeName => "page";
-
-    public string CurrentScopeName { get; private set; } = "unknown";
+    public override string AccessedScopeName => "page";
 
 }
