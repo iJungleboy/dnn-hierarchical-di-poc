@@ -3,7 +3,7 @@
 /// <summary>
 /// Simulate the setup of a page info
 /// </summary>
-internal class PageInfoInitializerService(PageInfoReal pageInfo)
+internal class PageInfoInitializerService(PageInfoState pageInfo)
 {
     public void SetupCurrentPage(int pageId)
     {

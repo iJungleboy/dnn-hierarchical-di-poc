@@ -18,12 +18,12 @@ internal static class StartupScopes
         services.TryAddScoped(typeof(IScopedService<,>), typeof(ScopedService<,>));
         
         // Page Info
-        services.TryAddScoped<PageInfoReal>();
+        services.TryAddScoped<PageInfoState>();
         services.TryAddTransient<IPageInfo, PageInfo>();
         services.TryAddTransient<PageInfoInitializerService>();
 
         // Module Info
-        services.TryAddScoped<ModuleInfoReal>();
+        services.TryAddScoped<ModuleInfoState>();
         services.TryAddTransient<IModuleInfo, ModuleInfo>();
         services.TryAddTransient<ModuleInfoInitializerService>();
 

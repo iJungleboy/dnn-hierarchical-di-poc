@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Module;
+﻿using DotNetNuke.DependencyInjection;
+using DotNetNuke.Module;
 
 namespace DotNetNuke.UnitTests;
 public class TestModuleInfoInModuleScope(IServiceProvider globalServiceProvider)
@@ -10,12 +11,12 @@ public class TestModuleInfoInModuleScope(IServiceProvider globalServiceProvider)
         var pageSp = globalServiceProvider.SetupPage(999);
 
         // Simulate two modules on the same page, each with its own scope
-        var moduleSp1 = pageSp.SetupModule(moduleId);
+        var moduleSp = pageSp.SetupModule(moduleId);
 
         // Simulate retrieving the same module in the first scope
-        var moduleOfModScope1A = moduleSp1.GetRequiredService<IModuleInfo>();
-        var moduleOfModScope1B = moduleSp1.GetRequiredService<IModuleInfo>();
-        return (moduleOfModScope1A, moduleOfModScope1B);
+        var first = moduleSp.GetRequiredService<IModuleInfo>();
+        var second = moduleSp.GetRequiredService<IModuleInfo>();
+        return (first, second);
     }
 
     [Theory]
@@ -45,7 +46,6 @@ public class TestModuleInfoInModuleScope(IServiceProvider globalServiceProvider)
         var moduleSp1 = pageSp.SetupModule(moduleId1);
         var moduleSp2 = pageSp.SetupModule(moduleId2);
 
-        // Simulate retrieving the same module in the first scope
         // Simulate retrieving the same module in the first scope
         var moduleInfoScope1 = moduleSp1.GetRequiredService<IModuleInfo>();
 

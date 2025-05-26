@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Page;
+﻿using DotNetNuke.DependencyInjection;
+using DotNetNuke.Page;
 
 namespace DotNetNuke.UnitTests;
 public class TestPageInfoInScopePage(IServiceProvider globalServiceProvider)

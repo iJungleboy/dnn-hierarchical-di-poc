@@ -3,7 +3,7 @@
 namespace DotNetNuke.DependencyInjection;
 internal static class ServiceScopeHelpers
 {
-    public static IServiceProvider CreateSubScope<TScopeDefinition>(this IServiceProvider globalServiceProvider, string scopeName)
+    public static IServiceProvider CreateSubScope<TScopeDefinition>(this IServiceProvider globalServiceProvider)
         where TScopeDefinition : ScopeDefinition, new()
     {
         // Create a new scope and get its service provider
@@ -13,7 +13,7 @@ internal static class ServiceScopeHelpers
         // Get the scope initializer, add the new scope accessor so it too will be initialized, and run
         var initializer = newServiceProvider.GetRequiredService<CurrentScopeInitializer>();
         initializer.AddInitializer<TScopeDefinition>();
-        initializer.Run(scopeName, globalServiceProvider);
+        initializer.Run(new TScopeDefinition().ScopeName, globalServiceProvider);
 
         // Return the new service provider
         return newServiceProvider;

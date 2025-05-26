@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Module;
+﻿using DotNetNuke.DependencyInjection;
+using DotNetNuke.Module;
 
 namespace DotNetNuke.UnitTests;
 public class TestUnavailableInfoInScopePage(IServiceProvider globalServiceProvider)
