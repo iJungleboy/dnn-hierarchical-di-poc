@@ -3,9 +3,12 @@ internal class CurrentScopeInitializer(IServiceProvider currentServiceProvider)
 {
     public List<IScopeAccessorInitializer> Initializers { get; private set; } = [];
 
-    public void AddInitializer<TScopeDefinition>() where TScopeDefinition : ScopeDefinition, new()
+    public void AddInitializer<TScopeDefinition>(bool startFreshScope = false)
+        where TScopeDefinition : ScopeDefinition, new()
     {
         var initializer = currentServiceProvider.GetRequiredService<IScopeAccessorInitializer<TScopeDefinition>>();
+        if (startFreshScope)
+            initializer.StartFreshScope = true;
         Initializers.Add(initializer);
     }
 

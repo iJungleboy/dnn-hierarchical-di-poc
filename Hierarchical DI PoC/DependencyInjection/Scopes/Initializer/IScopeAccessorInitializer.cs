@@ -6,6 +6,8 @@
 internal interface IScopeAccessorInitializer
 {
     void Run(string currentName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider);
+
+    bool StartFreshScope { get; set; }
 }
 
 /// <summary>

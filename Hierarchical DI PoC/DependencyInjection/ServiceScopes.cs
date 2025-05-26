@@ -14,7 +14,7 @@ internal static class ServiceScopes
     {
         // Create the scope and directly the service provider for the page scope
         var pageSp = globalServiceProvider
-            .CreateSubScope<ScopePage>();
+            .CreateScope<ScopePage>(false);
 
 
         pageSp.GetRequiredService<PageInfoInitializerService>()
@@ -32,7 +32,7 @@ internal static class ServiceScopes
     {
         // Create the scope and directly the service provider for the page scope
         var moduleSp = pageServiceProvider
-            .CreateSubScope<ScopeModule>();
+            .CreateScope<ScopeModule>(false);
 
         moduleSp.GetRequiredService<ModuleInfoInitializerService>()
             .SetupCurrentModule(moduleId);
@@ -49,7 +49,7 @@ internal static class ServiceScopes
     {
         // Create the scope and directly the service provider for the page scope
         var subModuleSp = moduleServiceProvider
-            .CreateSubScope<ScopeModule>();
+            .CreateScope<ScopeModule>(true);
 
         // Get main module definition from module scope
         var parentModuleInfo = moduleServiceProvider.GetRequiredService<ModuleInfoState>();
