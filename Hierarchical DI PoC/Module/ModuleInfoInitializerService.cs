@@ -3,10 +3,10 @@
 /// <summary>
 /// Simulate the setup of a page info
 /// </summary>
-internal class ModuleInfoInitializerService(ModuleInfoReal pageInfo)
+internal class ModuleInfoInitializerService(ModuleInfoReal moduleInfo)
 {
     public void SetupCurrentModule(int moduleId)
     {
-        pageInfo.ModuleId = moduleId;
+        moduleInfo.ModuleId = moduleId;
     }
 }
