@@ -1,8 +1,8 @@
 ﻿using DotNetNuke.DependencyInjection;
 using DotNetNuke.Module;
 
-namespace DotNetNuke.UnitTests;
-public class TestModuleInfoInModuleScope(IServiceProvider globalServiceProvider)
+namespace DotNetNuke.UnitTests.TestModules;
+public class ModuleInfoInModuleScope(IServiceProvider globalServiceProvider)
 {
     private (IModuleInfo first, IModuleInfo second) ArrangeTwoModuleInfoFromSameModuleScope(int moduleId)
     {

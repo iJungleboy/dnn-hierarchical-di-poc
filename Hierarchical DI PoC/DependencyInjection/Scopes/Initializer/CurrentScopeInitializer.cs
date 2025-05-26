@@ -23,6 +23,7 @@ internal class CurrentScopeInitializer(IServiceProvider currentServiceProvider)
 
         // Replace the existing initializer for this type, if it exists; at the same place in the list
         var index = Initializers.FindIndex(i => i is IScopeAccessorInitializer<TScopeDefinition>);
+        
         if (index >= 0)
             Initializers[index] = initializer;
         else

@@ -1,8 +1,8 @@
 ﻿using DotNetNuke.DependencyInjection;
 using DotNetNuke.Page;
 
-namespace DotNetNuke.UnitTests;
-public class TestPageInfoInScopeModule(IServiceProvider globalServiceProvider)
+namespace DotNetNuke.UnitTests.TestPages;
+public class PageInfoInModuleScope(IServiceProvider globalServiceProvider)
 {
     public const int MockPageId = 88;
 

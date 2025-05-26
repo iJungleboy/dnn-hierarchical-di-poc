@@ -1,7 +1,7 @@
 ﻿using DotNetNuke.DependencyInjection;
 using DotNetNuke.Page;
 
-namespace DotNetNuke.UnitTests;
+namespace DotNetNuke.UnitTests.TestPages;
 public class TestPageInfoInScopePage(IServiceProvider globalServiceProvider)
 {
     [Theory]

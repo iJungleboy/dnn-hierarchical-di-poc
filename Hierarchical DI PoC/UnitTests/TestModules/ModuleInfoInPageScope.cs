@@ -1,8 +1,8 @@
 ﻿using DotNetNuke.DependencyInjection;
 using DotNetNuke.Module;
 
-namespace DotNetNuke.UnitTests;
-public class TestUnavailableInfoInScopePage(IServiceProvider globalServiceProvider)
+namespace DotNetNuke.UnitTests.TestModules;
+public class ModuleInfoInPageScope(IServiceProvider globalServiceProvider)
 {
     /// <summary>
     /// Assert that we cannot get a module info in the page scope.
