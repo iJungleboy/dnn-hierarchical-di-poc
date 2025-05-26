@@ -1,13 +1,17 @@
 ﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
+
+/// <inheritdoc />
 internal class ScopeAccessorInitializer<TScopeDefinition>
     : IScopeAccessorInitializer<TScopeDefinition>
     where TScopeDefinition : ScopeDefinition, new()
 {
+    /// <inheritdoc />
     public bool ShouldNotInheritState { get; set; }
 
-    public void Run(string currentName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider)
+    /// <inheritdoc />
+    public void Run(string currentScopeName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider)
     {
         // Generate the new scope accessor, which will need to be initialized
         var newScopeAccessor = currentServiceProvider.GetRequiredService<IServiceScopeAccessor<TScopeDefinition>>();
@@ -17,12 +21,12 @@ internal class ScopeAccessorInitializer<TScopeDefinition>
 
         // If the parent is the root scope, then we need to use the current service provider
         // Otherwise we're already in a deeper scope, and we should use the one provided by the previous scope accessor
-        var pageScopeServiceProvider = parentScopeAccessor.IsValid && !ShouldNotInheritState
+        var pageScopeServiceProvider = parentScopeAccessor.IsInitialized && !ShouldNotInheritState
             ? parentScopeAccessor.ServiceProvider
             : currentServiceProvider;
 
         // Initialize the new scope accessor with the service provider and current name
-        newScopeAccessor.SetupServiceProvider(pageScopeServiceProvider, currentName);
+        newScopeAccessor.Setup(pageScopeServiceProvider, currentScopeName);
     }
 
 }

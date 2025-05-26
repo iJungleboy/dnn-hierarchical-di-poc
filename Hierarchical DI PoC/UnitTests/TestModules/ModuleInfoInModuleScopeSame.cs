@@ -19,7 +19,4 @@ public class ModuleInfoInModuleScopeSame(IServiceProvider globalServiceProvider)
         NotSame(first, second);
     }
 
-
-
-
 }

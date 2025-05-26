@@ -15,7 +15,7 @@ internal static class StartupScopes
 
         // Scope Accessors and Scoped Services
         services.TryAddScoped(typeof(IServiceScopeAccessor<>), typeof(ServiceScopeAccessor<>));
-        services.TryAddScoped(typeof(IScopedService<,>), typeof(ScopedService<,>));
+        services.TryAddScoped(typeof(IFromScope<,>), typeof(FromScope<,>));
         
         // Page Info
         services.TryAddScoped<PageInfoState>();

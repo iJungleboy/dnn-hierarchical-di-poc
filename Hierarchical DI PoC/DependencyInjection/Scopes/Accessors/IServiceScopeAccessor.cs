@@ -1,16 +1,18 @@
 ﻿namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
-/// Special helper to get a ServiceProvider of the page scope, in scenarios where inner scopes are used, like for each module.
+/// Special helper to get a ServiceProvider of another scope. For scenarios where inner scopes are used, like for each module.
 /// </summary>
-public interface IServiceScopeAccessor
+// ReSharper disable once UnusedTypeParameter
+public interface IServiceScopeAccessor<TScopeDefinition>
+    where TScopeDefinition : ScopeDefinition, new()
 {
     /// <summary>
     /// 
     /// </summary>
     /// <param name="serviceProvider">Page scoped service provider.</param>
     /// <param name="currentScopeName">Information about the scope this was created in, mainly for debugging issues.</param>
-    internal void SetupServiceProvider(IServiceProvider serviceProvider, string currentScopeName);
+    internal void Setup(IServiceProvider serviceProvider, string currentScopeName);
 
     /// <summary>
     /// The ServiceProvider.
@@ -25,12 +27,15 @@ public interface IServiceScopeAccessor
     /// <summary>
     /// Name of the scope that will be accessed; mainly for debugging purposes.
     /// </summary>
-    string AccessedScopeName { get; }
+    internal string AccessedScopeName { get; }
 
     /// <summary>
     /// Name of the current scope where this scope accessor was created. Mainly for debugging purposes.
     /// </summary>
-    string CurrentScopeName { get; }
+    internal string CurrentScopeName { get; }
 
-    bool IsValid { get; }
+    /// <summary>
+    /// Determines if the scope accessor is initialized / valid.
+    /// </summary>
+    bool IsInitialized { get; }
 }
