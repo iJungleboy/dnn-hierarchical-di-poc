@@ -14,8 +14,6 @@ internal static class StartupScopes
         services.TryAddScoped<CurrentScopeInitializer>();
 
         // Page Scopes
-        services.TryAddScoped<IPageScopeAccessor, PageScopeAccessor>();
-        //services.TryAddScoped<IPageScopeAccessor, ServiceScopeAccessor<ScopePage>>();
         services.TryAddScoped(typeof(IServiceScopeAccessor<>), typeof(ServiceScopeAccessor<>));
         services.AddTransient(typeof(IPageScopedService<>), typeof(PageScopedService<>));
         
@@ -25,7 +23,7 @@ internal static class StartupScopes
         services.TryAddTransient<PageInfoInitializerService>();
 
         // Module Scopes
-        services.TryAddScoped<IModuleScopeAccessor, ModuleScopeAccessor>();
+        //services.TryAddScoped<IModuleScopeAccessor, ModuleScopeAccessor>();
         services.AddTransient(typeof(IModuleScopedService<>), typeof(ModuleScopedService<>));
 
         // Module Info
