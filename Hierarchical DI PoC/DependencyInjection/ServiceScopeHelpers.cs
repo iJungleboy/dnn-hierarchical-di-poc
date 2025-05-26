@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+using ToSic.HierarchicalDI.DependencyInjection.PageScope;
 
-namespace ToSic.HierarchicalDI.DiBridges;
+namespace ToSic.HierarchicalDI.DependencyInjection;
 internal static class ServiceScopeHelpers
 {
     public static IServiceProvider CreatePagesScopedServiceProvider(this IServiceProvider globalServiceProvider)
@@ -17,7 +17,7 @@ internal static class ServiceScopeHelpers
 
         // In the module scope, we initialize the scoped PageScope Accessor and give it the parent scope
         // This is necessary for it to be able to give page-scoped objects
-        var innerPageScopeAccessor =  moduleSp.GetRequiredService<PageScopeAccessor>();
+        var innerPageScopeAccessor =  moduleSp.GetRequiredService<IPageScopeAccessor>();
         innerPageScopeAccessor.AttachPageServiceProvider(pageSp);
 
         return moduleSp;

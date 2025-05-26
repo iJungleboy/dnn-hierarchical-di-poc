@@ -1,4 +1,5 @@
-﻿using ToSic.HierarchicalDI.DiBridges;
+﻿using ToSic.HierarchicalDI.DependencyInjection;
+using ToSic.HierarchicalDI.DependencyInjection.PageScope;
 
 namespace ToSic.HierarchicalDI.Page;
 internal class PageInfo(IPageScopedService<PageInfoReal> realPageInfo): IPageInfo
