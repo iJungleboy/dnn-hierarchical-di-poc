@@ -16,7 +16,7 @@ internal static class UnitTestHelpers
     {
         // Create the scope and directly the service provider for the page scope
         var pageSp = globalServiceProvider
-            .CreatePagesScopedServiceProvider();
+            .CreatePageScopedServiceProvider();
 
         pageSp.GetRequiredService<PageInfoInitializerService>()
             .SetupCurrentPage(pageId);

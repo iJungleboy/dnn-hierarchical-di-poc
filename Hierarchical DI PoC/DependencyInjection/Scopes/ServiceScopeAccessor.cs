@@ -11,6 +11,7 @@ internal abstract class ServiceScopeAccessor(string accessedScopeName) : IServic
     {
         ServiceProvider = serviceProvider;
         CurrentScopeName = currentScopeName;
+        IsValid = true;
     }
 
     /// <inheritdoc />
@@ -21,8 +22,10 @@ internal abstract class ServiceScopeAccessor(string accessedScopeName) : IServic
         private set;
     }
 
-    public virtual string AccessedScopeName => accessedScopeName;
+    public bool IsValid { get; private set; }
 
-    public string CurrentScopeName { get; private set; } = "unknown";
+    public string AccessedScopeName => accessedScopeName;
+
+    public string CurrentScopeName { get; private set; } = ServiceScopeConstants.ScopeNotInitialized;
 
 }

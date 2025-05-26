@@ -6,4 +6,6 @@
 /// <remarks>
 /// Default constructor will always work, and use the current service provider as the source
 /// </remarks>
-internal class ModuleScopeAccessor() : ServiceScopeAccessor("module"), IModuleScopeAccessor;
+internal class ModuleScopeAccessor()
+    : ServiceScopeAccessor(ServiceScopeConstants.ScopeModule),
+        IModuleScopeAccessor;

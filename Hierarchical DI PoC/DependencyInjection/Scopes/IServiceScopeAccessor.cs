@@ -32,4 +32,5 @@ public interface IServiceScopeAccessor
     /// </summary>
     string CurrentScopeName { get; }
 
+    bool IsValid { get; }
 }
