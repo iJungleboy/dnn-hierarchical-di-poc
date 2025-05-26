@@ -1,21 +1,12 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace DotNetNuke.DependencyInjection.Scopes;
+﻿namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
 internal class CurrentScopeInitializer(IServiceProvider currentServiceProvider)
 {
     public List<IScopeInitializer> Initializers { get; private set; } = [];
 
-    public void Add(IScopeInitializer initializer)
-    {
-        if (initializer == null)
-            throw new ArgumentNullException(nameof(initializer), "Initializer cannot be null.");
-        Initializers.Add(initializer);
-    }
-
-    public void Add<TInitializer>() where TInitializer : IServiceScopeAccessor
+    public void AddInitializer<TInitializer>() where TInitializer : IServiceScopeAccessor
     {
         var initializer = currentServiceProvider.GetRequiredService<IScopeInitializer<TInitializer>>();
-        Add(initializer);
+        Initializers.Add(initializer);
     }
 
     public void Run(string scopeName, IServiceProvider parentServiceProvider)

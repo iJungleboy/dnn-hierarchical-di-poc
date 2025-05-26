@@ -1,8 +1,6 @@
 ﻿using DotNetNuke.DependencyInjection;
-using DotNetNuke.DependencyInjection.Scopes;
 using DotNetNuke.Module;
 using DotNetNuke.Page;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetNuke.UnitTests;
 internal static class UnitTestHelpers

@@ -1,6 +1,4 @@
 ﻿using DotNetNuke.Page;
-using Microsoft.Extensions.DependencyInjection;
-using static Xunit.Assert;
 
 namespace DotNetNuke.UnitTests;
 public class TestPageInfoInScopePage(IServiceProvider globalServiceProvider)

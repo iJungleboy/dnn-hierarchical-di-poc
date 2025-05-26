@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace DotNetNuke.DependencyInjection.Scopes;
+﻿namespace DotNetNuke.DependencyInjection.Scopes;
 internal class ServiceScopeSetup(IServiceProvider currentServiceProvider)
 {
     public void Run()

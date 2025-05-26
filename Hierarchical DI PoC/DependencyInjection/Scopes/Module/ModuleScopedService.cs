@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace DotNetNuke.DependencyInjection.Scopes;
+﻿namespace DotNetNuke.DependencyInjection.Scopes;
 
 /// <summary>
 /// Provide service which was generated within the page scope.

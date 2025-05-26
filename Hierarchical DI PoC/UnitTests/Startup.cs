@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace DotNetNuke.UnitTests;
+﻿namespace DotNetNuke.UnitTests;
 public class Startup
 {
     public void ConfigureServices(IServiceCollection services)

@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace DotNetNuke.DependencyInjection.Scopes;
-internal class ScopeInitializer<TScopeAccessor> : IScopeInitializer<TScopeAccessor> where TScopeAccessor : IServiceScopeAccessor
+﻿namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
+internal class ScopeAccessorInitializer<TScopeAccessor>
+    : IScopeInitializer<TScopeAccessor>
+    where TScopeAccessor : IServiceScopeAccessor
 {
     public void Run(string currentName, IServiceProvider currentServiceProvider, IServiceProvider parentServiceProvider)
     {

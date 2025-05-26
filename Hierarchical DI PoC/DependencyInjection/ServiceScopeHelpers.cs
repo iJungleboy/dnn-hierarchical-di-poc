@@ -1,5 +1,4 @@
-﻿using DotNetNuke.DependencyInjection.Scopes;
-using Microsoft.Extensions.DependencyInjection;
+﻿using DotNetNuke.DependencyInjection.Scopes.Initializer;
 
 namespace DotNetNuke.DependencyInjection;
 internal static class ServiceScopeHelpers
@@ -7,45 +6,16 @@ internal static class ServiceScopeHelpers
     public static IServiceProvider CreateSubScope<TScopeAccessor>(this IServiceProvider globalServiceProvider, string scopeName)
         where TScopeAccessor : IServiceScopeAccessor
     {
+        // Create a new scope and get its service provider
         var newScope = globalServiceProvider.CreateScope();
         var newServiceProvider = newScope.ServiceProvider;
 
-        // Make sure the page scope has the PageScopeAccessor initialized
+        // Get the scope initializer, add the new scope accessor so it too will be initialized, and run
         var initializer = newServiceProvider.GetRequiredService<CurrentScopeInitializer>();
-        initializer.Add<TScopeAccessor>();
+        initializer.AddInitializer<TScopeAccessor>();
         initializer.Run(scopeName, globalServiceProvider);
+
+        // Return the new service provider
         return newServiceProvider;
     }
-
-    //public static IServiceProvider CreatePageScopedServiceProvider(this IServiceProvider globalServiceProvider)
-    //{
-    //    var newScope = globalServiceProvider.CreateScope();
-    //    var newServiceProvider = newScope.ServiceProvider;
-
-    //    // Make sure the page scope has the PageScopeAccessor initialized
-    //    var initializer = newServiceProvider.GetRequiredService<CurrentScopeInitializer>();
-    //    initializer.Add<IPageScopeAccessor>();
-    //    initializer.Run(ServiceScopeConstants.ScopePage, globalServiceProvider);
-    //    return newServiceProvider;
-    //}
-
-    //public static IServiceProvider CreateModuleScopedServiceProvider(this IServiceProvider pageServiceProvider)
-    //{
-    //    var moduleSp = pageServiceProvider.CreateScope().ServiceProvider;
-
-    //    // In the module scope, we initialize the scoped PageScope Accessor and give it the parent scope
-    //    // This is necessary for it to be able to give page-scoped objects
-
-    //    var initializer = moduleSp.GetRequiredService<CurrentScopeInitializer>();
-    //    initializer.Add<IModuleScopeAccessor>();
-    //    initializer.Run(ServiceScopeConstants.ScopePage, pageServiceProvider);
-
-    //    //moduleSp.GetRequiredService<IScopeInitializer<IPageScopeAccessor>>()
-    //    //    .Run(ServiceScopeConstants.ScopeModule, moduleSp, pageServiceProvider);
-
-    //    //moduleSp.GetRequiredService<IScopeInitializer<IModuleScopeAccessor>>()
-    //    //    .Run(ServiceScopeConstants.ScopeModule, moduleSp, pageServiceProvider);
-
-    //    return moduleSp;
-    //}
 }

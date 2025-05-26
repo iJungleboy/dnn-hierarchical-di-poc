@@ -1,6 +1,4 @@
 ﻿using DotNetNuke.Module;
-using Microsoft.Extensions.DependencyInjection;
-using static Xunit.Assert;
 
 namespace DotNetNuke.UnitTests;
 public class TestModuleInfoInModuleScope(IServiceProvider globalServiceProvider)
