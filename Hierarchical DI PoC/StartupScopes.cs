@@ -1,5 +1,4 @@
 ﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
-using DotNetNuke.DependencyInjection.Scopes.Initializer;
 using DotNetNuke.Module;
 using DotNetNuke.Page;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -10,8 +9,8 @@ internal static class StartupScopes
     public static IServiceCollection SetupPageAndModuleScopes(this IServiceCollection services)
     {
         // Scope Initializers
-        services.TryAddTransient(typeof(IScopeAccessorInitializer<>), typeof(ScopeAccessorInitializer<>));
-        services.TryAddScoped<CurrentScopeInitializer>();
+        services.TryAddTransient(typeof(IServiceScopeAccessorInitializer<>), typeof(ServiceScopeAccessorInitializer<>));
+        services.TryAddScoped<ServiceScopeAccessorInitializersManager>();
 
         // Scope Accessors and Scoped Services
         services.TryAddScoped(typeof(IServiceScopeAccessor<>), typeof(ServiceScopeAccessor<>));

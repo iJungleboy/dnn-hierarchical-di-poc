@@ -1,13 +1,20 @@
-﻿namespace DotNetNuke.DependencyInjection.Scopes.Initializer;
+﻿namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
-/// Helper to initialize a scope accessor for a specific scope type.
+/// Helper to initialize a scope accessor for a specific scope.
 /// </summary>
 /// <remarks>
-/// This will always be used with the generic scoped initializer.
-/// It only has the non-generic version to allow placing in a list with other initializers.
+/// Services in the current scope will use the scope accessor to access services from another scope.
+/// For this to work, a new scope must have the accessors configured, so they can find the scope they need to access.
+/// 
+/// So the ScopeAccessorInitializer will run when new scopes are created, to set up all the accessors for that scope.
+///
+/// Note that this is not a generic Interface, so that all the initializers can be placed in a list,
+/// and the scope-creation can just call every initializer in the list.
+/// 
+/// But the real scope initializers will implement the generic interface, since that includes the information which scope they are meant for.
 /// </remarks>
-internal interface IScopeAccessorInitializer
+internal interface IServiceScopeAccessorInitializer
 {
     /// <summary>
     /// Run the initializer for the specific scope accessor.
@@ -27,11 +34,3 @@ internal interface IScopeAccessorInitializer
     /// </remarks>
     bool ShouldNotInheritState { get; set; }
 }
-
-/// <summary>
-/// Typed initializer, specific to a specific scope accessor type.
-/// </summary>
-/// <typeparam name="TScopeDefinition"></typeparam>
-internal interface IScopeAccessorInitializer<TScopeDefinition>
-    : IScopeAccessorInitializer
-    where TScopeDefinition : ScopeDefinition, new();

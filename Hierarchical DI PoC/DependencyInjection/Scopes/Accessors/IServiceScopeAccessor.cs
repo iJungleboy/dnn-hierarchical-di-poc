@@ -1,7 +1,7 @@
 ﻿namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
-/// Special helper to get a ServiceProvider of another scope. For scenarios where inner scopes are used, like for each module.
+/// Helper to get a ServiceProvider of another scope. For scenarios where inner scopes are used, like for each module.
 /// </summary>
 // ReSharper disable once UnusedTypeParameter
 public interface IServiceScopeAccessor<TScopeDefinition>

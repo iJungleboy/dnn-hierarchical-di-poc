@@ -1,4 +1,4 @@
-﻿using DotNetNuke.DependencyInjection.Scopes.Initializer;
+﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 namespace DotNetNuke.DependencyInjection;
 internal static class ServiceScopeHelpers
@@ -11,8 +11,8 @@ internal static class ServiceScopeHelpers
         var newServiceProvider = newScope.ServiceProvider;
 
         // Get the scope initializer, add the new scope accessor so it too will be initialized, and run
-        var initializer = newServiceProvider.GetRequiredService<CurrentScopeInitializer>();
-        initializer.SetupFromParent(parentServiceProvider);
+        var initializer = newServiceProvider.GetRequiredService<ServiceScopeAccessorInitializersManager>();
+        initializer.InheritFromParent(parentServiceProvider);
         initializer.AddInitializer<TScopeDefinition>(shouldNotInheritDefinition);
         initializer.Run(new TScopeDefinition().ScopeName, parentServiceProvider);
 
