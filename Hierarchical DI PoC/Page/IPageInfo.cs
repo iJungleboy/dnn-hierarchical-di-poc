@@ -2,5 +2,5 @@
 
 public interface IPageInfo
 {
-    int PageId { get; }
+    public int PageId { get; }
 }

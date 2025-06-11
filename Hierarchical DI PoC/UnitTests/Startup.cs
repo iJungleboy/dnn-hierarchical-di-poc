@@ -9,6 +9,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
 #pragma warning restore CA1822
     {
-        services.SetupPageAndModuleScopes();
+        services
+            .SetupScopeSystem()
+            .SetupPageAndModuleScopes();
     }
 }

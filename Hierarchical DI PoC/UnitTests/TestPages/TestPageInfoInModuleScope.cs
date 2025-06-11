@@ -2,7 +2,7 @@
 using DotNetNuke.Page;
 
 namespace DotNetNuke.UnitTests.TestPages;
-public class PageInfoInModuleScope(IServiceProvider globalServiceProvider)
+public class TestPageInfoInModuleScope(IServiceProvider globalServiceProvider)
 {
     public const int MockPageId = 88;
 

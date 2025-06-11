@@ -18,8 +18,8 @@ internal static class ServiceScopes
             .CreateScope<ScopePage>(false);
 
 
-        pageSp.GetRequiredService<PageInfoInitializerService>()
-            .SetupCurrentPage(pageId);
+        var currentPage = pageSp.GetRequiredService<PageInfoInitializerService>();
+        currentPage.SetupCurrentPage(pageId);
         return pageSp;
     }
 
@@ -35,8 +35,8 @@ internal static class ServiceScopes
         var moduleSp = pageServiceProvider
             .CreateScope<ScopeModule>(false);
 
-        moduleSp.GetRequiredService<ModuleInfoInitializerService>()
-            .SetupCurrentModule(moduleId);
+        var currentModule = moduleSp.GetRequiredService<ModuleInfoInitializerService>();
+        currentModule.SetupCurrentModule(moduleId);
         return moduleSp;
     }
 
@@ -55,8 +55,8 @@ internal static class ServiceScopes
         // Get main module definition from module scope
         var parentModuleInfo = moduleServiceProvider.GetRequiredService<ModuleInfoState>();
 
-        subModuleSp.GetRequiredService<ModuleInfoInitializerService>()
-            .SetupSubmodule(moduleId, parentModuleInfo);
+        var submodule = subModuleSp.GetRequiredService<ModuleInfoInitializerService>();
+        submodule.SetupSubmodule(moduleId, parentModuleInfo);
         return subModuleSp;
     }
 

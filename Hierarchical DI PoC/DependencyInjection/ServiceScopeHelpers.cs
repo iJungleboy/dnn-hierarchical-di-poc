@@ -4,6 +4,13 @@ using DotNetNuke.DependencyInjection.Scopes.Definitions;
 namespace DotNetNuke.DependencyInjection;
 internal static class ServiceScopeHelpers
 {
+    /// <summary>
+    /// Create a new (child) scope, inheriting the parent scope definition and initializers.
+    /// </summary>
+    /// <typeparam name="TScopeDefinition"></typeparam>
+    /// <param name="parentServiceProvider"></param>
+    /// <param name="shouldNotInheritDefinition"></param>
+    /// <returns></returns>
     public static IServiceProvider CreateScope<TScopeDefinition>(this IServiceProvider parentServiceProvider, bool shouldNotInheritDefinition = false)
         where TScopeDefinition : ScopeDefinition, new()
     {
@@ -16,7 +23,6 @@ internal static class ServiceScopeHelpers
         // Tell the scope definition "where" it is, so it can be queried later on for debugging purposes
         scopeInfo.Definition = new TScopeDefinition();
         scopeInfo.RestartsScopeWip = shouldNotInheritDefinition;
-
 
         // Get the scope initializer, add the new scope accessor so it too will be initialized, and run
         var scopeManager = newServiceProvider.GetRequiredService<ServiceScopeAccessorInitializersManager>();
