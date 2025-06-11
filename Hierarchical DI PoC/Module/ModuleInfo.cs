@@ -1,4 +1,6 @@
-﻿namespace DotNetNuke.Module;
+﻿using DotNetNuke.DependencyInjection.Scopes.Definitions;
+
+namespace DotNetNuke.Module;
 internal class ModuleInfo(IFromScope<ScopeModule, ModuleInfoState> realModuleInfo) : IModuleInfo
 {
     public int ModuleId => realModuleInfo.Value.ModuleId; // Simulating a module ID, replace with actual logic if needed

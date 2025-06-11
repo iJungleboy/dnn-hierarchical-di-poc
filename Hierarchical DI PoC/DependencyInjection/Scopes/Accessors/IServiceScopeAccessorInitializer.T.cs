@@ -1,4 +1,6 @@
-﻿namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
+﻿using DotNetNuke.DependencyInjection.Scopes.Definitions;
+
+namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
 /// Typed initializer, specific to a specific scope accessor type.

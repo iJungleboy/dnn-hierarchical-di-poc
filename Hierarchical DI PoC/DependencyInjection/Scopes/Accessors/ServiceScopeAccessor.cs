@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using DotNetNuke.DependencyInjection.Scopes.Definitions;
 
 namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 

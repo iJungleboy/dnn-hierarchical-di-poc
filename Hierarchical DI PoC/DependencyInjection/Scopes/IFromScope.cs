@@ -1,4 +1,6 @@
-﻿namespace DotNetNuke.DependencyInjection.Scopes;
+﻿using DotNetNuke.DependencyInjection.Scopes.Definitions;
+
+namespace DotNetNuke.DependencyInjection.Scopes;
 
 /// <summary>
 /// Provides a service from a specific scope.

@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Module;
+﻿using DotNetNuke.DependencyInjection.Scopes.Definitions;
+using DotNetNuke.Module;
 using DotNetNuke.Page;
 
 namespace DotNetNuke.DependencyInjection;

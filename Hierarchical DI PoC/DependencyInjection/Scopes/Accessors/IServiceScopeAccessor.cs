@@ -1,4 +1,6 @@
-﻿namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
+﻿using DotNetNuke.DependencyInjection.Scopes.Definitions;
+
+namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
 /// Helper to get a ServiceProvider of another scope. For scenarios where inner scopes are used, like for each module.

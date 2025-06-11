@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
+using DotNetNuke.DependencyInjection.Scopes.Definitions;
 using DotNetNuke.Module;
 using DotNetNuke.Page;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -15,6 +16,10 @@ internal static class StartupScopes
         // Scope Accessors and Scoped Services
         services.TryAddScoped(typeof(IServiceScopeAccessor<>), typeof(ServiceScopeAccessor<>));
         services.TryAddScoped(typeof(IFromScope<,>), typeof(FromScope<,>));
+
+        // Scope Definitions - mainly for debugging
+        // These must be initialized when a new scope is created, so that all services in that scope can query it
+        services.TryAddScoped<ICurrentScopeDefinition, CurrentScopeDefinition>();
         
         // Page Info
         services.TryAddScoped<PageInfoState>();

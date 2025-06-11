@@ -1,4 +1,5 @@
 ﻿using DotNetNuke.DependencyInjection.Scopes.Accessors;
+using DotNetNuke.DependencyInjection.Scopes.Definitions;
 
 namespace DotNetNuke.DependencyInjection.Scopes;
 

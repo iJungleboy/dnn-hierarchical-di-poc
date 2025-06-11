@@ -1,4 +1,6 @@
-﻿namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
+﻿using DotNetNuke.DependencyInjection.Scopes.Definitions;
+
+namespace DotNetNuke.DependencyInjection.Scopes.Accessors;
 
 /// <summary>
 /// This will coordinate and run initializers for the new (current) scope.
@@ -18,17 +20,20 @@ internal class ServiceScopeAccessorInitializersManager(IServiceProvider currentS
     /// Get the parent scope initializers to use in this scope as well.
     /// </summary>
     /// <param name="parentServiceProvider"></param>
-    public void InheritFromParent(IServiceProvider parentServiceProvider)
+    public void InheritInitializersFromParent(IServiceProvider parentServiceProvider)
     {
         // Make sure this only happens once
         if (_parentInitializersCloned)
             return;
 
+        if (Initializers.Any())
+            throw new InvalidOperationException("Cannot inherit initializers from parent scope, because the current scope already has initializers registered.");
+
         // Check if parent scope has a list of initializers
         var parentScopeInitializer = parentServiceProvider.GetRequiredService<ServiceScopeAccessorInitializersManager>();
 
         // Merge the lists; parent initializers will be run first
-        Initializers = [.. parentScopeInitializer.Initializers, ..Initializers];
+        Initializers = [.. parentScopeInitializer.Initializers];
         _parentInitializersCloned = true;
     }
 
@@ -54,7 +59,7 @@ internal class ServiceScopeAccessorInitializersManager(IServiceProvider currentS
             Initializers.Add(initializer);
     }
 
-    public void Run(string scopeName, IServiceProvider parentServiceProvider)
+    public void RunInitializers(string scopeName, IServiceProvider parentServiceProvider)
     {
         foreach (var initializer in Initializers)
             initializer.Run(scopeName, currentServiceProvider, parentServiceProvider);
